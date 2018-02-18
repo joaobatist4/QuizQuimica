@@ -6,41 +6,41 @@
 
     <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Descrição</label>
     <div class="form-group row">
-        <textarea class="form-control" id="descricaoPergunta" rows="4" ></textarea>
+        <textarea class="form-control" id="descricaoPergunta" rows="4" required></textarea>
     </div>
     
     <div class="form-group row">
         <label for="respostaA" class="col-sm-2 col-form-label">A)</label>
-            <div class="col-sm-10">
-                <input type="text" placeholder="Resposta A" class="form-control" id = "respostaA"/>
-            </div>
+        <div class="col-sm-10">
+            <input type="text" placeholder="Resposta A" class="form-control" id = "respostaA" required/>
+        </div>
     </div>
     
     <div class="form-group row">
         <label for="respostaB" class="col-sm-2 col-form-label">B)</label>
         <div class="col-sm-10">
-            <input type="text" placeholder="Resposta B" class="form-control" id="respostaB"/>
+            <input type="text" placeholder="Resposta B" class="form-control" id="respostaB" required/>
         </div>
     </div>
     
     <div class="form-group row">
         <label for="respostaC" class="col-sm-2 col-form-label">C)</label>
         <div class="col-sm-10">
-            <input type="text" placeholder="Resposta C" class="form-control" id="respostaC"/>
+            <input type="text" placeholder="Resposta C" class="form-control" id="respostaC" required/>
         </div>
     </div>
     
     <div class="form-group row">
         <label for="respostaD" class="col-sm-2 col-form-label">D)</label>
         <div class="col-sm-10">
-            <input type="text" placeholder="Resposta D" class="form-control" id="respostaD"/>
+            <input type="text" placeholder="Resposta D" class="form-control" id="respostaD" required/>
         </div>
     </div>
     
     <div class="form-group row">
         <label for="respostaE" class="col-sm-2 col-form-label">E)</label>
         <div class="col-sm-10">
-            <input type="text" placeholder="Resposta E" class="form-control" id="respostaE"/>
+            <input type="text" placeholder="Resposta E" class="form-control" id="respostaE" required/>
         </div>
     </div>
     
