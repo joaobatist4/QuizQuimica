@@ -11,21 +11,9 @@
     <body>
         
         <div class="container">
-        
-            <div class ="row">
             
-                <div class="col-sm-4 col-sm-offset-4 login">
+            <div class="principal">
 
-                    <input type="text" placeholder="TESTE">
+    <h1>TESTE</h1>
 
-                </div>
-    
-            </div>
-        </div>
-        
-        <footer>
-        
-        </footer>
-    </body>
-    
-</html>
+<?php include("rodape.php");?>
