@@ -1,4 +1,4 @@
-<?php include("../../cabecalho.php");?>
+<?php include("../cabecalho.php");?>
 
 <h2>Cadastro de Perguntas</h2>
 
@@ -49,4 +49,4 @@
 </form>
 
 
-<?php include("../../rodape.php");?>
+<?php include("../rodape.php");?>

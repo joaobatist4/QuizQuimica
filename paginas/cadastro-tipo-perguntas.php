@@ -1,4 +1,4 @@
-<?php include("../../cabecalho.php");?>
+<?php include("../cabecalho.php");?>
 
 <div class="col-sm-2">
     <br/>
@@ -35,4 +35,4 @@
   </div>
 </div>
 
-<?php include("../../rodape.php");?>
+<?php include("../rodape.php");?>
