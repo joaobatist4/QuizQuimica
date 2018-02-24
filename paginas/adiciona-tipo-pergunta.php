@@ -1,16 +1,27 @@
 <?php include("../cabecalho.php");?>
+<?php include("../conexao.php");?>
+<?php include("../dao.php");?>
+
 
 <?php 
 //pega o valor da página anterior
-    $descricaoTipoPergunta = $_GET["descricaoTipoPergunta"];
+$descricaoTipoPergunta = $_GET["descricaoTipoPergunta"];
+$resultado = inserirTipoPergunta($conexao,$descricaoTipoPergunta);
+$tiposPergunta = listarTipoPergunta($conexao);
+    
+    if($resultado){?>
 
-$conexao = mysqli_connect('localhost:3306','root','root','knowqui');
-$query = "insert into tipopergunta(descricao) values ('{$descricaoTipoPergunta}')";
-
-mysqli_query($conexao,$query);
-mysqli_close($conexao);
-
-?>
- 
 <p class="alert-success">Tipo pergunta <?= $descricaoTipoPergunta?> adicionada.</p>
+
+<?php 
+    }else{
+        $msg_error = mysqli_error($conexao);
+?>
+
+<p class="alert-danger">Tipo pergunta <?=$descricaoTipoPergunta?> não adicionada:<?=$msg_error?></p>
+
+<?php
+    }
+?>
+
 <?php include("../rodape.php");?>
