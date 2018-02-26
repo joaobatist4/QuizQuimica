@@ -11,6 +11,12 @@
     $respostaD = $_GET["respostaD"];
     $respostaE = $_GET["respostaE"];
 
+    $tipoPergunta = $_GET["tipoPergunta"];
+    $nivel = $_GET["nivelPergunta"];
+    $tempo = $_GET["tempo"];
+
+    
+
     $arrayPerguntas = array($descricaoPergunta);
     $arrayRespostas = array($respostaA,$respostaB,$respostaC,$respostaD,$respostaE);
 

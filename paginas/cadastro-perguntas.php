@@ -16,7 +16,7 @@
         <div class="input-group-prepend">
             <label for="nivelPergunta" class="col-sm-2 col-form-label">Nível </label>
         </div>
-        <select class="input-group-text" id="nivelPergunta" name="nivelPergunta">
+        <select class="input-group-text" id="nivelPergunta" name="nivelPergunta" required>
             <option selected>Selecione...</option>    
             <option value="1">Fácil</option>
             <option value="2">Médio</option>
@@ -26,16 +26,30 @@
         <div class="input-group-prepend">
             <label for="tipoPergunta" class="col-sm-4 col-form-label">Tipo Pergunta</label>
         </div>
-            <select class="input-group-text" id="tipoPergunta" name="tipoPergunta">
+            <select class="input-group-text" id="tipoPergunta" name="tipoPergunta" required>
                 <option selected>Selecione...</option>
             
-            
+            <?php 
                 
-            </select>
+                $resultado = mysqli_query($conexao,"select * from tipopergunta");
+                
+                while($tipos =  mysqli_fetch_assoc($resultado)){ ?>
+                
+                <option value="<?php echo $tipos['id']?>"><?php echo $tipos['descricao']?></option>
+                
+                <?php
+                                                               }
+            ?>
             
+            </select>
         
+        <label for="tempo" class ="col-sm-1 col-form-label">Tempo</label>
+        <div class="col-sm-2">
+            <input type="time" placeholder="Tempo" class="form-control" id="tempo" name="tempo" required/>
+        </div>
+            
     </div>
-    
+
     <div class="form-group row">
         <label for="respostaA" class="col-sm-2 col-form-label">A)</label>
         <div class="col-sm-9">
@@ -98,13 +112,7 @@
              <label class="custom-control-label" for="respostaCorretaE">Correta</label>
         </div>
     </div>
-    
-    <?php
-                $result = listarTipoPergunta($conexao);
-                while($tipoPergunta = $result){
-                    echo $tipoPergunta['descricao']."<br/>";
-                }               
-            ?>
+   
     
     <button type="submit" class="btn btn-outline-success">Cadastrar</button>
     
