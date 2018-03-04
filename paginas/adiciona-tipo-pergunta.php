@@ -9,7 +9,11 @@ $descricaoTipoPergunta = $_GET["descricaoTipoPergunta"];
 $resultado = inserirTipoPergunta($conexao,$descricaoTipoPergunta);
 $tiposPergunta = listarTipoPergunta($conexao);
     
-    if($resultado){?>
+    if($resultado){
+                   header("Location: cadastro-tipo-perguntas.php");
+        die();
+?>
+
 
 <p class="alert-success">Tipo pergunta <?= $descricaoTipoPergunta?> adicionada.</p>
 
