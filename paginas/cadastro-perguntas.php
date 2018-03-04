@@ -23,7 +23,6 @@
 
 <?php
     $perguntasRespostas = listarPerguntas($conexao);
-    
     foreach($perguntasRespostas as $resultado ):
     
     ?>
@@ -33,7 +32,18 @@
             <td><?= $resultado['nivel']?></td>
             <td><?= $resultado['tipo']?></td>
             <td><?= $resultado['tempoPergunta']?>min.</td>
-            <td><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIcSURBVEhL7ZVLTxNhFIabmOjPETcujAuT6WUuJdHplGhlISnuZAEaTROoCFJEMq20w4JWrGYKJsXE1CBS23ipQIs1XjaSgsEoQncg0Al2M0fP8Imu3PhNQ9AnOYs58ybPvGczlj3LNMMcyjNMW95qFZNu9z6yNpcJ6aT8kmUrC15v9a0obsw6HHnT5YMXu6fa+2Pwvk+GrVAItoJBQDk2JxH6dPYPhXqVhD5ZmIMroTiUgmFDjs1nGKaVxOiihH2TnQNx/d3HVSiVNXj2ZtGQY/Mix21O2Wx1JEqPbFzozqiNWkCJ6mOPCzqKcbA5nj3d4LlBovRA6YtRqVIt34T1L3cA5clMwWiOZ1cudU2TKD1+l8KqaszG8rYcz+6Xh2QSpceOdCW2I8XBj8iqp7VI2JcmUXr8SYr7zDDfQ6L02Ja6/gXpLb4rN7LbpPH/0r9g90nvSpXsMB8gUXo8UNjxXMKlVcvR2klTES73XHX9kNRQmrjq6E3HBH3pVUftpMnL7v3RDvva/MQ5eBJ3wudi+y/pqPTNFCky6LM13pNd69rrHlib9cPT2/WGPDciQSrC0v+f/uT6BXZhbrwVUIwz/6gF8OypMDdDIvRp8vDeo4xTL973QelhG4zJ4mbU7/iqBux9JGIO4gnh0+Fj9YDya+e5D3j2gRb2AHltDs0evu4I4wTxuLB05hTXTNbmc9YjWJsa7AfJ417GYvkOT/tqFI9/0EcAAAAASUVORK5CYII="></td>
+            <td>
+                <a href="#" role="button" data-toggle="modal" data-target="#cadastrarPerguntaResposta" 
+                   descricao = "<?= $resultado['descricaoPergunta'] ?>" >
+                <!--Imagem editar-->
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEFSURBVEhL7dHbCgFBGMDxuRDJWyieAS8jt0SaTa6U0xsoXPEGmBzKoXU+xYUHIBcW7yDN8GlW+wAzKzX/+m5mpv3tziLV33dJpXwGxlND06J8SX6N4cx/zBc2V01jMO8XwHxLXoA29YVBRvPbKZs7W/AYPyI+WkG+HcmRlr5knxnN718c4zE/JjZAaRUZrIrYlhTHVhyuHf45PyouK2qOicO1tydre1Bz9s0MsR2FddjnR8WlUIUKSaEKFdJPUIh2HfX3w5/2on3koRPXgw6cKysuFYW6JW/kobsZm7qYiUtHoXQisE5GQwzwz5d3HDXpKIRjwUM6Hlj1yt4wXDtfVv1zCL0A95vNfenIl0AAAAAASUVORK5CYII=">         
+                </a>
+                
+                <a>
+                <!--Imagem deletar-->
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEZSURBVEhL7dbNDYJAEAVgurAGLWNDaIIKOFMITWHAAvSqHjxzNNEYnUd2EgPsH8zKxZdMDOvOfMSLk/yzapo03VLtG6U2+ig46KUZdavUTh/ZA7TNsu6U50/6vM7B0XPIsoue0WGm/mo6jN7K8nWvqve5KB6hOKPoxQzMcuIt/bxHeks0cIXgQ5QLMzFbXxsHjUCGjT64CfV+cRuOwVMDFqOcEFwM5fjg4ijHNhjnUVCODY+Gckz4d4mjHBseDUVWgW0olzhuQvE8dSaC21AAKHHcheJ7lCjug+qr/V0TjhneeAjKWYzPQTmLcPqzrrGuDBtdKMf04v0KRLP1tXGwmBEivvrQc+dc+qSXPS+UA5zqt+vtP3GSJB8dMjDEDq+o8wAAAABJRU5ErkJggg==">
+                </a>
+            </td>
         </tr>
     
     <?php
@@ -42,6 +52,7 @@
 
 </table>
 
+<!-- Modal Cadastrar -->
 <div class="modal fade" id="cadastrarPerguntaResposta" tabindex="-1" role="dialog" aria-labelledby="cadastrarPerguntaResposta" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -51,7 +62,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body"  id="conteudoModalCadastro">
         
           <form action="adiciona-pergunta.php" method="post" enctype="multipart/form-data">
 
@@ -178,7 +189,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> <!--Fim do modal cadastrar-->
 
 
 <?php include("../rodape.php");?>

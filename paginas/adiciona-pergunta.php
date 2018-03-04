@@ -76,7 +76,7 @@
         $arrayPerguntas = array($descricaoPergunta);
         $arrayRespostas = array($respostaA,$respostaB,$respostaC,$respostaD,$respostaE, $respostaCorreta);
 
-        $resultado = adicionarPerguntaRespostas($conexao, $descricaoPergunta, $arrayRespostas, $tipoPergunta, $nivel, $tempo, $nome_imagem);
+        $resultado = adicionarPerguntaRespostas($conexao, $descricaoPergunta, $arrayRespostas, $tipoPergunta, $nivel, $tempo, $nome_imagem, $caminho_imagem);
 
         if($resultado){
 

@@ -14,8 +14,8 @@ function listarTipoPergunta($conexao){
     return mysqli_fetch_assoc($resultado);
 }
 
-function adicionarPerguntaRespostas($conexao, $descricaoPergunta, $arrayRespostas, $tipoPergunta, $nivel, $tempo, $nome_imagem){
-    $insertPergunta = "insert into pergunta (descricao, id_tipo, id_nivel, tempo, imagem) values ('$descricaoPergunta', $tipoPergunta, $nivel, $tempo, '$nome_imagem')";
+function adicionarPerguntaRespostas($conexao, $descricaoPergunta, $arrayRespostas, $tipoPergunta, $nivel, $tempo, $nome_imagem, $caminho_imagem){
+    $insertPergunta = "insert into pergunta (descricao, id_tipo, id_nivel, tempo, imagem, caminho_imagem) values ('$descricaoPergunta', $tipoPergunta, $nivel, $tempo, '$nome_imagem','$caminho_imagem')";
     mysqli_query($conexao, $insertPergunta);
     
     $idPergunta = mysqli_insert_id($conexao);
@@ -80,6 +80,39 @@ function listarPerguntas($conexao){
     
     return $perguntasERespostas;
     
+}
+
+function detalharPergunta($conexao, $idPergunta){
+    $consultaPergunta = "select pergunta.id as idPergunta, 
+		pergunta.descricao as descricaoPergunta,
+        pergunta.tempo as tempoPergunta,
+        pergunta.imagem as imgPergunta,
+        pergunta.caminho_imagem as caminhoImagem,
+        nivel.descricao as nivel,
+        tipopergunta.descricao as tipo
+			from pergunta 
+            INNER JOIN nivel on nivel.id = pergunta.id_nivel
+            INNER JOIN tipopergunta on tipopergunta.id = pergunta.id_tipo
+            WHERE pergunta.id = $idPergunta";
+    
+    $resultadoPergunta = mysqli_query($conexao, $consultaPergunta);
+    
+    return $resultadoPergunta;
+    
+}
+
+function detalharRespostas($conexao, $idPergunta){
+    $consultaResposta = "select id, descricao, ehCorreta from resposta where id_pergunta = $idPergunta";
+    
+    $respostas = array();
+    
+    $resultado = mysqli_query($conexao, $consultaResposta);
+    
+    while($listaRespostas = mysqli_fetch_assoc($resultado)){
+        array_push($respostas, $listaRespostas);
+    }
+    
+    return $respostas;
 }
     
 ?>
