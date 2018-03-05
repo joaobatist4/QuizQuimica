@@ -24,7 +24,6 @@
 <?php
     $perguntasRespostas = listarPerguntas($conexao);
     foreach($perguntasRespostas as $resultado ):
-    
     ?>
         <tr>
             <td><?= $resultado['idPergunta'] ?></td>
@@ -33,8 +32,13 @@
             <td><?= $resultado['tipo']?></td>
             <td><?= $resultado['tempoPergunta']?>min.</td>
             <td>
-                <a href="#" role="button" data-toggle="modal" data-target="#cadastrarPerguntaResposta" 
-                   descricao = "<?= $resultado['descricaoPergunta'] ?>" >
+                <a href="#" class="edit" 
+                    idPergunta ="<?= $resultado['idPergunta'] ?>"  
+                    descricaoPergunta = "<?= $resultado['descricaoPergunta'] ?>"  
+                    nivel = "<?= $resultado['nivelId']?>"  
+                    tipo="<?= $resultado['tipoperguntaId']?>" 
+                    tempoPergunta="<?= $resultado['tempoPergunta']?>">
+                    
                 <!--Imagem editar-->
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEFSURBVEhL7dHbCgFBGMDxuRDJWyieAS8jt0SaTa6U0xsoXPEGmBzKoXU+xYUHIBcW7yDN8GlW+wAzKzX/+m5mpv3tziLV33dJpXwGxlND06J8SX6N4cx/zBc2V01jMO8XwHxLXoA29YVBRvPbKZs7W/AYPyI+WkG+HcmRlr5knxnN718c4zE/JjZAaRUZrIrYlhTHVhyuHf45PyouK2qOicO1tydre1Bz9s0MsR2FddjnR8WlUIUKSaEKFdJPUIh2HfX3w5/2on3koRPXgw6cKysuFYW6JW/kobsZm7qYiUtHoXQisE5GQwzwz5d3HDXpKIRjwUM6Hlj1yt4wXDtfVv1zCL0A95vNfenIl0AAAAAASUVORK5CYII=">         
                 </a>
@@ -51,6 +55,34 @@
     ?>
 
 </table>
+
+<script>
+    $(document).ready(function(){
+        $(".edit").click(function(){
+            var idPergunta          = $(this).attr("idPergunta");
+            var descricaoPergunta   = $(this).attr("descricaoPergunta");
+            var nivel               = $(this).attr("nivel");
+            var tipo                = $(this).attr("tipo");
+            var tempoPergunta       = $(this).attr("tempoPergunta");
+
+            var modal = $("#cadastrarPerguntaResposta");
+
+            modal.find("#idPergunta").empty();
+            modal.find("#descricaoPergunta").empty();
+            modal.find("#nivelPergunta").val("0");
+            modal.find("#tipoPergunta").val("0");
+            modal.find("#tempo").empty();
+
+            modal.find("#idPergunta").html(idPergunta);
+            modal.find("#descricaoPergunta").html(descricaoPergunta);
+            modal.find("#nivelPergunta").val(nivel);
+            modal.find("#tipoPergunta").val(tipo);
+            modal.find("#tempo").val(tempoPergunta);
+
+            modal.modal('show');
+        });
+    });  
+</script>
 
 <!-- Modal Cadastrar -->
 <div class="modal fade" id="cadastrarPerguntaResposta" tabindex="-1" role="dialog" aria-labelledby="cadastrarPerguntaResposta" aria-hidden="true">
@@ -77,7 +109,7 @@
                     <label for="nivelPergunta" class="col-sm-2 col-form-label">Nível </label>
                 </div>
                 <select class="input-group-text" id="nivelPergunta" name="nivelPergunta" required>
-                    <option selected>Selecione...</option>    
+                    <option value="0" selected>Selecione...</option>    
                     <option value="1">Fácil</option>
                     <option value="2">Médio</option>
                     <option value="3">Difícil</option>
@@ -87,7 +119,7 @@
                     <label for="tipoPergunta" class="col-sm-4 col-form-label">Tipo Pergunta</label>
                 </div>
                     <select class="input-group-text" id="tipoPergunta" name="tipoPergunta" required>
-                        <option selected>Selecione...</option>
+                        <option value="0" selected>Selecione...</option>
 
                     <?php 
                         $resultado = mysqli_query($conexao,"select * from tipopergunta");
@@ -180,7 +212,6 @@
                      <label class="custom-control-label" for="respostaCorretaE">Correta</label>
                 </div>
             </div>
-
     
     <button type="submit" class="btn btn-outline-success">Cadastrar</button>
     
