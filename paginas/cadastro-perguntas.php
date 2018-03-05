@@ -38,7 +38,7 @@
                     nivel = "<?= $resultado['nivelId']?>"  
                     tipo="<?= $resultado['tipoperguntaId']?>" 
                     tempoPergunta="<?= $resultado['tempoPergunta']?>">
-                    
+
                 <!--Imagem editar-->
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEFSURBVEhL7dHbCgFBGMDxuRDJWyieAS8jt0SaTa6U0xsoXPEGmBzKoXU+xYUHIBcW7yDN8GlW+wAzKzX/+m5mpv3tziLV33dJpXwGxlND06J8SX6N4cx/zBc2V01jMO8XwHxLXoA29YVBRvPbKZs7W/AYPyI+WkG+HcmRlr5knxnN718c4zE/JjZAaRUZrIrYlhTHVhyuHf45PyouK2qOicO1tydre1Bz9s0MsR2FddjnR8WlUIUKSaEKFdJPUIh2HfX3w5/2on3koRPXgw6cKysuFYW6JW/kobsZm7qYiUtHoXQisE5GQwzwz5d3HDXpKIRjwUM6Hlj1yt4wXDtfVv1zCL0A95vNfenIl0AAAAAASUVORK5CYII=">         
                 </a>
@@ -94,9 +94,10 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <form action="adiciona-pergunta.php" method="post" enctype="multipart/form-data">
+      
       <div class="modal-body"  id="conteudoModalCadastro">
         
-          <form action="adiciona-pergunta.php" method="post" enctype="multipart/form-data">
 
             <label for="descricaoPergunta" class="col-sm-2 col-form-label col-form-label-lg">Descrição</label>
             <div class="form-group row">
@@ -213,11 +214,13 @@
                 </div>
             </div>
     
-    <button type="submit" class="btn btn-outline-success">Cadastrar</button>
-    
-</form>
-          
-      </div>
+   
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-outline-success">Cadastrar</button>
+        </div>
+    </form>
+      
     </div>
   </div>
 </div> <!--Fim do modal cadastrar-->
