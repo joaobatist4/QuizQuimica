@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('home/home');
 });
+
+Route::get('/cadastro-pergunta', 'PerguntaController@lista');
+
+Route::get('/cadastro-tipo-pergunta', 'TipoPerguntaController@lista');
