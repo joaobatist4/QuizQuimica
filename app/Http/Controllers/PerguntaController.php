@@ -82,4 +82,11 @@ class PerguntaController extends Controller{
 
 	}
 
+	public function jsonRespotas($id){
+		
+		$respotas = DB::select('SELECT * FROM resposta WHERE id_pergunta = '.$id );
+
+		return response()->json($respotas);
+	}
+
 }
