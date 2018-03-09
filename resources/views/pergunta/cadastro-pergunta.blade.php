@@ -88,8 +88,8 @@
       </div>
       <div class="modal-body"  id="conteudoModalCadastro">
         
-          <form action="adiciona-pergunta.php" method="post" enctype="multipart/form-data">
-
+          <form action="/insert-pergunta" method="post" enctype="multipart/form-data">
+            <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
             <label for="descricaoPergunta" class="col-sm-2 col-form-label col-form-label-lg">Descrição</label>
             <div class="form-group row">
                 <textarea class="form-control col-sm-12" id="descricaoPergunta" rows="4" name="descricaoPergunta" required></textarea>
