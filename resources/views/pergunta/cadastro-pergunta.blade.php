@@ -139,7 +139,7 @@
 
             <div class="form-group row">
                 <label for="respostaA" class="col-sm-1 col-form-label">A)</label>
-                <div class="col-sm-8">
+                <div class="col-sm-9">
                     <input type="text" placeholder="Resposta A" class="form-control" id = "respostaA" name="respostaA" required/>
                 </div>
 
@@ -152,7 +152,7 @@
 
             <div class="form-group row">
                 <label for="respostaB" class="col-sm-1 col-form-label">B)</label>
-                <div class="col-sm-8">
+                <div class="col-sm-9">
                     <input type="text" placeholder="Resposta B" class="form-control" id="respostaB" name="respostaB" required/>
                 </div>
 
@@ -165,7 +165,7 @@
 
             <div class="form-group row">
                 <label for="respostaC" class="col-sm-1 col-form-label">C)</label>
-                <div class="col-sm-8">
+                <div class="col-sm-9">
                     <input type="text" placeholder="Resposta C" class="form-control" id="respostaC" name="respostaC" required/>
                 </div>
 
@@ -178,7 +178,7 @@
 
             <div class="form-group row">
                 <label for="respostaD" class="col-sm-1 col-form-label">D)</label>
-                <div class="col-sm-8">
+                <div class="col-sm-9">
                     <input type="text" placeholder="Resposta D" class="form-control" id="respostaD" name="respostaD" required/>
                 </div>
 
@@ -191,7 +191,7 @@
 
             <div class="form-group row">
                 <label for="respostaE" class="col-sm-1 col-form-label">E)</label>
-                <div class="col-sm-8">
+                <div class="col-sm-9">
                     <input type="text" placeholder="Resposta E" class="form-control" id="respostaE" name="respostaE" required/>
                 </div>
                 <div class="custom-control custom-radio">
