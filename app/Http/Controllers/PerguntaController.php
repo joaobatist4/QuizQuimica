@@ -101,7 +101,7 @@ class PerguntaController extends Controller{
         (SELECT '$respostaE',$idPergunta,'$respostaCorreta' = 'E', 'E' )
     	;");
 		//return redirect->action('PerguntaController@lista');
-		return view('home/home');
+		return redirect()->route('perguntaCadastro');
 
 	}
 

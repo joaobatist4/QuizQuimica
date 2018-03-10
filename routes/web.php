@@ -19,7 +19,7 @@ Route::get('/home', function () {
     return view('home/home');
 });
 
-Route::get('/cadastro-pergunta', 'PerguntaController@lista');
+Route::get('/cadastro-pergunta', 'PerguntaController@lista')->name('perguntaCadastro');
 
 Route::get('/cadastro-tipo-pergunta', 'TipoPerguntaController@lista');
 Route::post('/insert-pergunta', 'PerguntaController@inserirPerguntaResposta');
