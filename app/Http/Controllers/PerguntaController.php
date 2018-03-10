@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Input;
 use Validator;
 
 class PerguntaController extends Controller{
@@ -59,19 +60,19 @@ class PerguntaController extends Controller{
 		
 
 		$imagem = $request->file('imagem');
-
+		//$imagem = Input::only('imagem');
 		if ($imagem != null) {
-			$rules = array('imagem' => 'requires|max:10000|mimes:jpg, jpeg, png');	
-			$validator = Validator::make($imagem, $rules);	
+			//$rules = array('imagem' => 'requires|max:10000|mimes:jpg, jpeg, png');	
+			//$validator = Validator::make(['imagem' => $imagem], $rules);	
 			
-				if (!($validator->fails())) {
+				//if (!($validator->fails())) {
 					$caminhoDestino = public_path('img/questoes');
 					$arquivoOriginal = $imagem->getClientOriginalName();
 					$imagem->move( $caminhoDestino, $arquivoOriginal);	
-				}else{
-					$arquivoOriginal = null;
-					$caminhoDestino = null;
-				}
+				//}else{
+				//	$arquivoOriginal = null;
+				//	$caminhoDestino = null;
+				//}
 		}else{
 			$arquivoOriginal = null;
 			$caminhoDestino = null;
