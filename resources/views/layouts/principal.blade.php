@@ -32,7 +32,7 @@
                   Cadastros
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="/">Alunos</a>
+                  <a class="dropdown-item" href="/home">Alunos</a>
                   <a class="dropdown-item" href="/cadastro-pergunta">Perguntas e Respostas</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="/cadastro-tipo-pergunta">Tipo de Perguntas</a>

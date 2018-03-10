@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Validator;
 
 class PerguntaController extends Controller{
 
@@ -19,7 +20,7 @@ class PerguntaController extends Controller{
 			        tipopergunta.descricao as tipo
 						from pergunta 
 			            INNER JOIN nivel on nivel.id = pergunta.id_nivel
-			            INNER JOIN tipopergunta on tipopergunta.id = pergunta.id_tipo');
+			            INNER JOIN tipopergunta on tipopergunta.id = pergunta.id_tipo ORDER BY pergunta.id DESC');
 		//dd($perguntas);
 
 		$respostas = DB::select('select id, descricao, ehCorreta, _index from resposta');
@@ -54,10 +55,31 @@ class PerguntaController extends Controller{
 		//$caminhoDestino = $request->file('imagem')->store('public/img/');
 		//$caminhoDestino = Storage::putFile('public/img/', $request->file('imagem'));
 		
+
+		
+
 		$imagem = $request->file('imagem');
-		$caminhoDestino = public_path('img/questoes');
-		$arquivoOriginal = $imagem->getClientOriginalName();
-		$imagem->move( $caminhoDestino, $arquivoOriginal);
+
+		if ($imagem != null) {
+			$rules = array('imagem' => 'requires|max:10000|mimes:jpg, jpeg, png');	
+			$validator = Validator::make($imagem, $rules);	
+			
+				if (!($validator->fails())) {
+					$caminhoDestino = public_path('img/questoes');
+					$arquivoOriginal = $imagem->getClientOriginalName();
+					$imagem->move( $caminhoDestino, $arquivoOriginal);	
+				}else{
+					$arquivoOriginal = null;
+					$caminhoDestino = null;
+				}
+		}else{
+			$arquivoOriginal = null;
+			$caminhoDestino = null;
+		}
+
+		
+
+		
 
 		$idPergunta = DB::table('pergunta')->insertGetId(
 			['descricao' => $descricaoPergunta, 'id_tipo' => $tipoPergunta, 'id_nivel' => $nivelPergunta,'tempo' => $tempoPergunta, 'imagem' => $arquivoOriginal, 'caminho_imagem' => $caminhoDestino]

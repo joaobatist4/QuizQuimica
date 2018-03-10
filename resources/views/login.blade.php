@@ -3,10 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Listagem</title>
+    <title>Login</title>
     <link rel="stylesheet" href="/css/app.css">
     <link rel="stylesheet" href="/css/font-awesome.min.css">
-    <script src="/js/jquery-3.2.1.min.js"></script>
     <script src="/js/app.js"></script>
     <style>
 
@@ -46,12 +45,6 @@
             </div>
         </div>
         
-    </div>
-    <div class="text-center col-sm-12" style="position: absolute;bottom: 0px;">
-        <p>Clínica Med Saúde</p>
-        Rua:xxxxxxxxxxxx, N:xxxx <br>
-        Bairro:xxxxxxxxxx - Fortaleza/CE <br>
-        Contato: (85) xxxx-xxxx / xxxx-xxxx 
-    </div>            
+    </div>          
 </body>
 </html>
