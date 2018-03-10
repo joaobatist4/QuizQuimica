@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="https://png.icons8.com/dusk/50/000000/test-tube.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Quiz @yield('title')</title>
+    <title>KnowQui @yield('title')</title>
     <script src="/js/app.js"></script>
     <link rel="stylesheet" href="/css/bootstrap.css">
 </head>
@@ -32,7 +33,7 @@
                   Cadastros
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="/home">Alunos</a>
+                  <!--<a class="dropdown-item" href="/home">Alunos</a>-->
                   <a class="dropdown-item" href="/cadastro-pergunta">Perguntas e Respostas</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="/cadastro-tipo-pergunta">Tipo de Perguntas</a>

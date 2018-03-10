@@ -28,8 +28,11 @@ class PerguntaController extends Controller{
 		
 		$tiposPerguntas = DB::select('select id, descricao from tipopergunta');
 
-		return view('pergunta/cadastro-pergunta',
-		['perguntas' => $perguntas,
+		/*['perguntas' => $perguntas,
+		 'respostas' => $respostas,
+		 'tiposPerguntas' => $tiposPerguntas]*/
+
+		return view('pergunta/cadastro-pergunta',['perguntas' => $perguntas,
 		 'respostas' => $respostas,
 		 'tiposPerguntas' => $tiposPerguntas]);
 	}

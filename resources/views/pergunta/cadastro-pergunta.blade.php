@@ -3,7 +3,7 @@
 @section('content')
 <h2>Cadastro de Perguntas</h2>
 
-<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#cadastrarPerguntaResposta">
+<button type="button" class="btn btn-outline-primary create" data-toggle="modal" data-target="#cadastrarPerguntaResposta">
   Cadastrar Perguntas
 </button><br/><br/>
 
@@ -18,13 +18,13 @@
             <th scope="col">Opções</th>
         </tr>
 	</thead>	
-		<?php foreach ($perguntas as $pergunta ) : ?>
+		@forelse ($perguntas as $pergunta )
 			<tr>
-				<td><?= $pergunta->idPergunta 		?></td>
-				<td><?= $pergunta->descricaoPergunta?></td>
-				<td><?= $pergunta->nivel 			?></td>
-				<td><?= $pergunta->tipo 			?></td>
-				<td><?= $pergunta->tempoPergunta 	?></td>
+				<td>{{$pergunta->idPergunta}} 		</td>
+				<td>{{$pergunta->descricaoPergunta}}</td>
+				<td>{{$pergunta->nivel}} 			</td>
+				<td>{{$pergunta->tipo}} 			</td>
+				<td>{{$pergunta->tempoPergunta}} 	</td>
 				<td>
                 <a href="#" class="edit" 
                     idPergunta ="<?= $pergunta->idPergunta ?>"  
@@ -44,11 +44,39 @@
                 </a>
             </td>
 			</tr>
-		<?php endforeach?>
+
+            @empty
+
+            <tr>
+                <tr><p class="alert alert-primary">Não há nenhuma pergunta cadastrada</p><tr>
+            </tr>
+
+		@endforelse
 
 </table>
 
 <script>
+
+    $(document).ready(function(){
+        $(".create").click(function(){
+
+            var modal = $("#cadastrarPerguntaResposta");
+
+            modal.find("#idPergunta").empty();
+            modal.find("#descricaoPergunta").empty();
+            modal.find("#nivelPergunta").val("0");
+            modal.find("#tipoPergunta").val("0");
+            modal.find("#tempo").empty();
+            modal.find("#respostaA").empty();
+            modal.find("#respostaB").empty();
+            modal.find("#respostaC").empty();
+            modal.find("#respostaD").empty();
+            modal.find("#respostaE").empty();
+        });
+    });
+
+
+
     $(document).ready(function(){
         $(".edit").click(function(){
             var idPergunta          = $(this).attr("idPergunta");
@@ -70,7 +98,6 @@
             modal.find("#nivelPergunta").val(nivel);
             modal.find("#tipoPergunta").val(tipo);
             modal.find("#tempo").val(tempoPergunta);
-            modal.find("#respostaA").html(nivel);
 
             $.ajax({
                 url: "/jsonRespotas/"+idPergunta,
@@ -150,9 +177,9 @@
                 </div>
                     <select class="custom-select col-sm-2" id="tipoPergunta" name="tipoPergunta" required>
                         <option selected>Selecione...</option>
-                        <?php foreach ($tiposPerguntas as $tipo) :  ?>
-                        	<option value="<?= $tipo->id?>"><?=$tipo->descricao?></option>
-                        <?php endforeach ?>
+                        @foreach ($tiposPerguntas as $tipo)
+                        	<option value="{{$tipo->id}}">{{$tipo->descricao}}</option>
+                        @endforeach
                     </select>
 
                 <label for="tempo" class ="col-sm-1 col-form-label">Tempo</label>

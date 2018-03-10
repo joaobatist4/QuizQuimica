@@ -25,4 +25,4 @@ Route::get('/cadastro-tipo-pergunta', 'TipoPerguntaController@lista');
 Route::post('/insert-pergunta', 'PerguntaController@inserirPerguntaResposta');
 
 
-Route::get('/jsonRespotas/{id}', 'PerguntaController@jsonRespotas');
+Route::get('/jsonRespotas/{id}', 'PerguntaController@jsonRespotas')->where('id','[0-9]+');
