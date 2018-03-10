@@ -29,8 +29,8 @@
                 <a href="#" class="edit" 
                     idPergunta ="<?= $pergunta->idPergunta ?>"  
                     descricaoPergunta = "<?= $pergunta->descricaoPergunta ?>"  
-                    nivel = "<?= $pergunta->nivel?>"  
-                    tipo="$pergunta->tipo" 
+                    nivel = "<?= $pergunta->nivelId?>"  
+                    tipo="<?=$pergunta->tipoperguntaId?>" 
                     tempoPergunta="<?= $pergunta->tempoPergunta?>"
                     " >
 
@@ -71,6 +71,44 @@
             modal.find("#tipoPergunta").val(tipo);
             modal.find("#tempo").val(tempoPergunta);
             modal.find("#respostaA").html(nivel);
+
+            $.ajax({
+                url: "/jsonRespotas/"+idPergunta,
+                type: 'GET',
+                contentType: 'application/json',
+                success: function(data) {
+                    data.forEach(function(value){
+                        switch (value._index) {
+                            case 'A':
+                                modal.find("#respostaA").empty();
+                                modal.find("#respostaA").val(value.descricao);
+                                value.ehCorreta ==1 ? $("#respostaCorretaA").prop("checked", true): ''; 
+                                break;
+                            case 'B':
+                                modal.find("#respostaB").empty();
+                                modal.find("#respostaB").val(value.descricao);
+                                value.ehCorreta ==1 ? $("#respostaCorretaB").prop("checked", true): ''; 
+                                break;
+                            case 'C':
+                                modal.find("#respostaC").empty();
+                                modal.find("#respostaC").val(value.descricao);
+                                value.ehCorreta ==1 ? $("#respostaCorretaC").prop("checked", true): ''; 
+                                break;
+                            case 'D':
+                                modal.find("#respostaD").empty();
+                                modal.find("#respostaD").val(value.descricao);
+                                value.ehCorreta ==1 ? $("#respostaCorretaD").prop("checked", true): ''; 
+                                break;
+                            case 'E':
+                                modal.find("#respostaE").empty();
+                                modal.find("#respostaE").val(value.descricao);
+                                value.ehCorreta ==1 ? $("#respostaCorretaE").prop("checked", true): ''; 
+                                break;
+                        }
+                    });
+                    console.log(data)
+                }
+            });
 
             modal.modal('show');
         });
