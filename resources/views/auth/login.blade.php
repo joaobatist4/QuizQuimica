@@ -11,6 +11,8 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
+                        <h1 class="text-center"><img src="https://png.icons8.com/color/100/000000/test-tube.png"></h1>
+                        <h1 class="text-center">KnowQui</h1>
                         <div class="form-group row">
                             <label for="email" class="col-sm-4 col-form-label text-md-right">Endereço de Email</label>
 
