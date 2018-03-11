@@ -115,4 +115,40 @@ class PerguntaController extends Controller{
 		return response()->json($respotas);
 	}
 
+	public function editarPerguntaResposta(Request $request){
+		$idPergunta = $request->input('idPergunta');
+		$descricaoPergunta = $request->input('descricaoPergunta');
+		$nivelPergunta = $request->input('nivelPergunta');
+		$tipoPergunta = $request->input('tipoPergunta');
+		$tempoPergunta = $request->input('tempo');
+
+		$idRespostaA = $request->input('idRespostaA');
+		$idRespostaB = $request->input('idRespostaB');
+		$idRespostaC = $request->input('idRespostaC');
+		$idRespostaD = $request->input('idRespostaD');
+		$idRespostaE = $request->input('idRespostaE');
+		
+		$respostaA = $request->input('respostaA');
+		$respostaB = $request->input('respostaB');
+		$respostaC = $request->input('respostaC');
+		$respostaD = $request->input('respostaD');
+		$respostaE = $request->input('respostaE');
+		$respostaCorreta = $request->input('respostaCorreta');
+
+		$updatePergunta = DB::update("update pergunta set descricao = '$descricaoPergunta',	id_nivel = $nivelPergunta, id_tipo = $tipoPergunta,	tempo = $tempoPergunta WHERE id = ".$idPergunta);
+
+		$updateRespostaA = DB::update("update resposta set descricao = '$respostaA', ehCorreta = '$respostaCorreta' = 'A' where id = ".$idRespostaA);
+
+		$updateRespostaB = DB::update("update resposta set descricao = '$respostaB', ehCorreta = '$respostaCorreta' = 'B' where id = ".$idRespostaB);
+
+		$updateRespostaC = DB::update("update resposta set descricao = '$respostaC', ehCorreta = '$respostaCorreta' = 'C' where id = ".$idRespostaC);
+
+		$updateRespostaD = DB::update("update resposta set descricao = '$respostaD', ehCorreta = '$respostaCorreta' = 'D' where id = ".$idRespostaD);
+
+		$updateRespostaE = DB::update("update resposta set descricao = '$respostaE', ehCorreta = '$respostaCorreta' = 'E' where id = ".$idRespostaE);
+
+		return redirect()->route('perguntaCadastro');
+
+	}
+
 }

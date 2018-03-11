@@ -24,5 +24,7 @@ Route::get('/cadastro-pergunta', 'PerguntaController@lista')->name('perguntaCada
 Route::get('/cadastro-tipo-pergunta', 'TipoPerguntaController@lista');
 Route::post('/insert-pergunta', 'PerguntaController@inserirPerguntaResposta');
 
+Route::post('/editar-pergunta', 'PerguntaController@editarPerguntaResposta');
+
 
 Route::get('/jsonRespotas/{id}', 'PerguntaController@jsonRespotas')->where('id','[0-9]+');
