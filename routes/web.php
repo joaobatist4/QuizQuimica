@@ -12,7 +12,8 @@
 */
 
 Route::get('/', function (){
-	return view('home/home');}
+	//return view('home/home');}
+	return view('/login');}
 );
 
 Route::get('/home', function () {
