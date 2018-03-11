@@ -24,12 +24,12 @@ class PerguntaController extends Controller{
 			            INNER JOIN tipopergunta on tipopergunta.id = pergunta.id_tipo ORDER BY pergunta.id DESC');
 		//dd($perguntas);
 
-		$respostas = DB::select('select id, descricao, ehCorreta, _index from resposta');
+		//$respostas = DB::select('select id, descricao, ehCorreta, _index from resposta');
 		
 		$tiposPerguntas = DB::select('select id, descricao from tipopergunta');
 
 		return view('pergunta/cadastro-pergunta',['perguntas' => $perguntas,
-		 'respostas' => $respostas,
+		 /*'respostas' => $respostas,*/
 		 'tiposPerguntas' => $tiposPerguntas]);
 	}
 
@@ -47,7 +47,6 @@ class PerguntaController extends Controller{
 		$respostaB = $request->input('respostaB');
 		$respostaC = $request->input('respostaC');
 		$respostaD = $request->input('respostaD');
-		$respostaE = $request->input('respostaE');
 		$respostaCorreta = $request->input('respostaCorreta');
 
 		$arrayPergunta = array($descricaoPergunta, $tipoPergunta, $nivelPergunta, $tempoPergunta);
@@ -76,10 +75,7 @@ class PerguntaController extends Controller{
 			$arquivoOriginal = null;
 			$caminhoDestino = null;
 		}
-
-		
-
-		
+	
 
 		$idPergunta = DB::table('pergunta')->insertGetId(
 			['descricao' => $descricaoPergunta, 'id_tipo' => $tipoPergunta, 'id_nivel' => $nivelPergunta,'tempo' => $tempoPergunta, 'imagem' => $arquivoOriginal, 'caminho_imagem' => $caminhoDestino]
@@ -96,8 +92,6 @@ class PerguntaController extends Controller{
         (SELECT '$respostaC',$idPergunta,'$respostaCorreta' = 'C', 'C' )
         UNION
         (SELECT '$respostaD',$idPergunta,'$respostaCorreta' = 'D', 'D' )
-        UNION
-        (SELECT '$respostaE',$idPergunta,'$respostaCorreta' = 'E', 'E' )
     	;");
 		//return redirect->action('PerguntaController@lista');
 		return redirect()->route('perguntaCadastro');
@@ -122,14 +116,12 @@ class PerguntaController extends Controller{
 		$idRespostaB = $request->input('idRespostaB');
 		$idRespostaC = $request->input('idRespostaC');
 		$idRespostaD = $request->input('idRespostaD');
-		$idRespostaE = $request->input('idRespostaE');
 		
 		$respostaA = $request->input('respostaA');
 		$respostaB = $request->input('respostaB');
 		$respostaC = $request->input('respostaC');
 		$respostaD = $request->input('respostaD');
-		$respostaE = $request->input('respostaE');
-		$respostaCorreta = $request->input('respostaCorreta');
+		$respostaCorreta = $request->input('edit_respostaCorreta');
 
 		$updatePergunta = DB::update("update pergunta set descricao = '$descricaoPergunta',	id_nivel = $nivelPergunta, id_tipo = $tipoPergunta,	tempo = $tempoPergunta WHERE id = ".$idPergunta);
 
@@ -140,8 +132,6 @@ class PerguntaController extends Controller{
 		$updateRespostaC = DB::update("update resposta set descricao = '$respostaC', ehCorreta = '$respostaCorreta' = 'C' where id = ".$idRespostaC);
 
 		$updateRespostaD = DB::update("update resposta set descricao = '$respostaD', ehCorreta = '$respostaCorreta' = 'D' where id = ".$idRespostaD);
-
-		$updateRespostaE = DB::update("update resposta set descricao = '$respostaE', ehCorreta = '$respostaCorreta' = 'E' where id = ".$idRespostaE);
 
 		return redirect()->route('perguntaCadastro');
 

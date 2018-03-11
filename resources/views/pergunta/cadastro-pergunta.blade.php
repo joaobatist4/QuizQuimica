@@ -71,7 +71,6 @@
             modal.find("#respostaB").empty();
             modal.find("#respostaC").empty();
             modal.find("#respostaD").empty();
-            modal.find("#respostaE").empty();
         });
     });
 
@@ -88,16 +87,16 @@
             var modal = $("#editarPerguntaResposta");
 
             modal.find("#edit_idPergunta").empty();
-            modal.find("#edit_descricaoPergunta").empty();
-            modal.find("#edit_nivelPergunta").val("0");
-            modal.find("#edit_tipoPergunta").val("0");
-            modal.find("#edit_tempo").empty();
+            modal.find("#descricaoPergunta").empty();
+            modal.find("#nivelPergunta").val("0");
+            modal.find("#tipoPergunta").val("0");
+            modal.find("#tempo").empty();
 
             modal.find("#edit_idPergunta").val(idPergunta);
-            modal.find("#edit_descricaoPergunta").html(descricaoPergunta);
-            modal.find("#edit_nivelPergunta").val(nivel);
-            modal.find("#edit_tipoPergunta").val(tipo);
-            modal.find("#edit_tempo").val(tempoPergunta);
+            modal.find("#descricaoPergunta").html(descricaoPergunta);
+            modal.find("#nivelPergunta").val(nivel);
+            modal.find("#tipoPergunta").val(tipo);
+            modal.find("#tempo").val(tempoPergunta);
 
             $.ajax({
                 url: "/jsonRespotas/"+idPergunta,
@@ -108,33 +107,27 @@
                         switch (value._index) {
                             case 'A':
                                 modal.find("#edit_idRespostaA").val(value.id);
-                                modal.find("#edit_respostaA").empty();
-                                modal.find("#edit_respostaA").val(value.descricao);
-                                value.ehCorreta ==1 ? $("#edit_respostaCorretaA").prop("checked", true): ''; 
+                                modal.find("#respostaA").empty();
+                                modal.find("#respostaA").val(value.descricao);
+                                value.ehCorreta ==1 ? $("#edit_respostaCorretaA").prop("checked", true): $("#edit_respostaCorretaA").prop("checked", false); 
                                 break;
                             case 'B':
                                 modal.find("#edit_idRespostaB").val(value.id);
-                                modal.find("#edit_respostaB").empty();
-                                modal.find("#edit_respostaB").val(value.descricao);
-                                value.ehCorreta ==1 ? $("#edit_respostaCorretaB").prop("checked", true):''; 
+                                modal.find("#respostaB").empty();
+                                modal.find("#respostaB").val(value.descricao);
+                                value.ehCorreta ==1 ? $("#edit_respostaCorretaB").prop("checked", true): $("#edit_respostaCorretaB").prop("checked", false); 
                                 break;
                             case 'C':
                                 modal.find("#edit_idRespostaC").val(value.id);
-                                modal.find("#edit_respostaC").empty();
-                                modal.find("#edit_respostaC").val(value.descricao);
-                                value.ehCorreta ==1 ? $("#edit_respostaCorretaC").prop("checked", true): ''; 
+                                modal.find("#respostaC").empty();
+                                modal.find("#respostaC").val(value.descricao);
+                                value.ehCorreta ==1 ? $("#edit_respostaCorretaC").prop("checked", true): $("#edit_respostaCorretaC").prop("checked", false); 
                                 break;
                             case 'D':
                                 modal.find("#edit_idRespostaD").val(value.id);
-                                modal.find("#edit_respostaD").empty();
-                                modal.find("#edit_respostaD").val(value.descricao);
-                                value.ehCorreta ==1 ? $("#edit_respostaCorretaD").prop("checked", true): ''; 
-                                break;
-                            case 'E':
-                                modal.find("#edit_idRespostaE").val(value.id);
-                                modal.find("#edit_respostaE").empty();
-                                modal.find("#edit_respostaE").val(value.descricao);
-                                value.ehCorreta ==1 ? $("#edit_respostaCorretaE").prop("checked", true): ''; 
+                                modal.find("#respostaD").empty();
+                                modal.find("#respostaD").val(value.descricao);
+                                value.ehCorreta ==1 ? $("#edit_respostaCorretaD").prop("checked", true): $("#edit_respostaCorretaD").prop("checked", false); 
                                 break;
                         }
                     });
@@ -160,7 +153,7 @@
         
           <form action="/insert-pergunta" method="post" enctype="multipart/form-data">
 
-            <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
+            <input type = "hidden" name = "_token" value = "{{csrf_token()}}">
             <label for="descricaoPergunta" class="col-sm-2 col-form-label col-form-label-lg">Descrição</label>
             <div class="form-group row">
                 <textarea class="form-control col-sm-12" id="descricaoPergunta" rows="4" name="descricaoPergunta" required></textarea>
@@ -260,17 +253,6 @@
 
             </div>
 
-            <div class="form-group row">
-                <label for="respostaE" class="col-sm-1 col-form-label">E)</label>
-                <div class="col-sm-9">
-                    <input type="text" placeholder="Resposta E" class="form-control" id="respostaE" name="respostaE" required/>
-                </div>
-                <div class="custom-control custom-radio">
-                    <input type="radio" id="respostaCorretaE" name="respostaCorreta" value="E" class="custom-control-input">
-                     <label class="custom-control-label" for="respostaCorretaE">Correta</label>
-                </div>
-            </div>
-
     <div class="modal-footer">
     	<button type="submit" class="btn btn-outline-success">Cadastrar</button>
     </div>
@@ -295,10 +277,10 @@
         
           <form action="/editar-pergunta" method="post" enctype="multipart/form-data">
             <input type="hidden" name="idPergunta" id = "edit_idPergunta"/>
-            <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
+            <input type = "hidden" name = "_token" value = " {{csrf_token()}}">
             <label for="descricaoPergunta" class="col-sm-2 col-form-label col-form-label-lg">Descrição</label>
             <div class="form-group row">
-                <textarea class="form-control col-sm-12" id="edit_descricaoPergunta" rows="4" name="descricaoPergunta" required></textarea>
+                <textarea class="form-control col-sm-12" id="descricaoPergunta" rows="4" name="descricaoPergunta" required></textarea>
             </div>
 
             <div class="form-group row">
@@ -306,7 +288,7 @@
                 <div class="input-group-prepend">
                     <label for="nivelPergunta" class="col-sm-2 col-form-label">Nível </label>
                 </div>
-                <select class="custom-select col-sm-2" id="edit_nivelPergunta" name="nivelPergunta" required>
+                <select class="custom-select col-sm-2" id="nivelPergunta" name="nivelPergunta" required>
                     <option selected>Selecione...</option>    
                     <option value="1">Fácil</option>
                     <option value="2">Médio</option>
@@ -316,7 +298,7 @@
                 <div class="input-group-prepend">
                     <label for="tipoPergunta" class="col-sm-2 ">Tipo Pergunta</label>
                 </div>
-                    <select class="custom-select col-sm-2" id="edit_tipoPergunta" name="tipoPergunta" required>
+                    <select class="custom-select col-sm-2" id="tipoPergunta" name="tipoPergunta" required>
                         <option selected>Selecione...</option>
                         @foreach ($tiposPerguntas as $tipo)
                             <option value="{{$tipo->id}}">{{$tipo->descricao}}</option>
@@ -325,7 +307,7 @@
 
                 <label for="tempo" class ="col-sm-1 col-form-label">Tempo</label>
                 <div class="col-sm-2">
-                    <input type="number" placeholder="Tempo" class="form-control" id="edit_tempo" name="tempo" required/>
+                    <input type="number" placeholder="Tempo" class="form-control" id="tempo" name="tempo" required/>
                 </div>
 
             </div>
@@ -336,7 +318,7 @@
                         <span class="input-group-text"> Imagem </span>
                     </div>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="edit_inputGroupFile01" name="imagem">
+                        <input type="file" class="custom-file-input" id="inputGroupFile01" name="imagem">
                         <label class="custom-file-label" for="inputGroupFile01">Selecione a imagem...</label>
                     </div>
 
@@ -347,12 +329,12 @@
                 <input type="hidden" name="idRespostaA" id="edit_idRespostaA"/>
                 <label for="respostaA" class="col-sm-1 col-form-label">A)</label>
                 <div class="col-sm-9">
-                    <input type="text" placeholder="Resposta A" class="form-control" id = "edit_respostaA" name="respostaA" required/>
+                    <input type="text" placeholder="Resposta A" class="form-control" id = "respostaA" name="respostaA" required/>
                 </div>
 
                 <div class="custom-control custom-radio">
                     <input type="hidden" name="idRespostaB" id="edit_idRespostaB"/>
-                    <input type="radio" id="edit_respostaCorretaA" value="A" name="edit_respostaCorreta" class="custom-control-input">
+                    <input type="radio" id="edit_respostaCorretaA" value="A" name="edit_respostaCorreta" class="custom-control-input" checked>
                      <label class="custom-control-label" for="edit_respostaCorretaA">Correta</label>
                 </div>
 
@@ -361,7 +343,7 @@
             <div class="form-group row">
                 <label for="respostaB" class="col-sm-1 col-form-label">B)</label>
                 <div class="col-sm-9">
-                    <input type="text" placeholder="Resposta B" class="form-control" id="edit_respostaB" name="respostaB" required/>
+                    <input type="text" placeholder="Resposta B" class="form-control" id="respostaB" name="respostaB" required/>
                 </div>
 
                 <div class="custom-control custom-radio">
@@ -375,7 +357,7 @@
                 <input type="hidden" name="idRespostaC" id="edit_idRespostaC"/>
                 <label for="respostaC" class="col-sm-1 col-form-label">C)</label>
                 <div class="col-sm-9">
-                    <input type="text" placeholder="Resposta C" class="form-control" id="edit_respostaC" name="respostaC" required/>
+                    <input type="text" placeholder="Resposta C" class="form-control" id="respostaC" name="respostaC" required/>
                 </div>
 
                 <div class="custom-control custom-radio">
@@ -389,7 +371,7 @@
                 <input type="hidden" name="idRespostaD" id="edit_idRespostaD"/>
                 <label for="respostaD" class="col-sm-1 col-form-label">D)</label>
                 <div class="col-sm-9">
-                    <input type="text" placeholder="Resposta D" class="form-control" id="edit_respostaD" name="respostaD" required/>
+                    <input type="text" placeholder="Resposta D" class="form-control" id="respostaD" name="respostaD" required/>
                 </div>
 
                 <div class="custom-control custom-radio">
@@ -397,18 +379,6 @@
                      <label class="custom-control-label" for="edit_respostaCorretaD">Correta</label>
                 </div>
 
-            </div>
-
-            <div class="form-group row">
-                <input type="hidden" name="idRespostaE" id="edit_idRespostaE"/>
-                <label for="respostaE" class="col-sm-1 col-form-label">E)</label>
-                <div class="col-sm-9">
-                    <input type="text" placeholder="Resposta E" class="form-control" id="edit_respostaE" name="respostaE" required/>
-                </div>
-                <div class="custom-control custom-radio">
-                    <input type="radio" id="edit_respostaCorretaE" name="edit_respostaCorreta" value="E" class="custom-control-input">
-                     <label class="custom-control-label" for="edit_respostaCorretaE">Correta</label>
-                </div>
             </div>
 
     <div class="modal-footer">
