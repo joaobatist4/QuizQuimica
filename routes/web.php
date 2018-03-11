@@ -25,6 +25,6 @@ Route::get('/cadastro-tipo-pergunta', 'TipoPerguntaController@lista');
 Route::post('/insert-pergunta', 'PerguntaController@inserirPerguntaResposta');
 
 Route::post('/editar-pergunta', 'PerguntaController@editarPerguntaResposta');
-
+Route::get('/excluir-pergunta/{id}', 'PerguntaController@excluirPergunta')->where('id','[0-9]+');
 
 Route::get('/jsonRespotas/{id}', 'PerguntaController@jsonRespotas')->where('id','[0-9]+');

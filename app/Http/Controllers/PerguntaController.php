@@ -28,10 +28,6 @@ class PerguntaController extends Controller{
 		
 		$tiposPerguntas = DB::select('select id, descricao from tipopergunta');
 
-		/*['perguntas' => $perguntas,
-		 'respostas' => $respostas,
-		 'tiposPerguntas' => $tiposPerguntas]*/
-
 		return view('pergunta/cadastro-pergunta',['perguntas' => $perguntas,
 		 'respostas' => $respostas,
 		 'tiposPerguntas' => $tiposPerguntas]);
@@ -149,6 +145,16 @@ class PerguntaController extends Controller{
 
 		return redirect()->route('perguntaCadastro');
 
+	}
+
+	public function excluirPergunta($idPergunta){
+		$resultado = DB::delete('delete from resposta where id_pergunta = '.$idPergunta);
+
+
+		$mensagem = DB::delete('delete from pergunta where id = '.$idPergunta);
+		
+
+		return redirect()->route('perguntaCadastro');
 	}
 
 }
