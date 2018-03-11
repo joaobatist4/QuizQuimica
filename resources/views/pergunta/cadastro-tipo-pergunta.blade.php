@@ -11,6 +11,26 @@
 
 </div>
 
+
+<table class="table">
+  <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Descrição</th>
+        </tr>
+  </thead>
+        @forelse($tiposPerguntas as $tipoPergunta)  
+        <tr>
+          <td>{{$tipoPergunta->id}}</td>
+          <td>{{$tipoPergunta->descricao}}</td>
+        </tr>
+        @empty
+        <tr>
+            <tr><p class="alert alert-primary">Não há nenhum tipo de pergunta cadastrado!</p><tr>
+        </tr>
+        @endforelse
+
+</table>
 <div class="modal fade" id="inserirTipoPergunta" tabindex="-1" role="dialog" aria-labelledby="inserirTipoPergunta" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">

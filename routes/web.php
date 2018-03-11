@@ -12,8 +12,8 @@
 */
 
 Route::get('/', function (){
-	//return view('home/home');}
-	return view('/login');}
+	return view('/auth/login');}
+	//return view('/login');}
 );
 
 Route::get('/home', function () {
@@ -29,3 +29,6 @@ Route::post('/editar-pergunta', 'PerguntaController@editarPerguntaResposta');
 Route::get('/excluir-pergunta/{id}', 'PerguntaController@excluirPergunta')->where('id','[0-9]+');
 
 Route::get('/jsonRespotas/{id}', 'PerguntaController@jsonRespotas')->where('id','[0-9]+');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
