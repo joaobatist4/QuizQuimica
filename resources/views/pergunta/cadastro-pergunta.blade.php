@@ -165,7 +165,6 @@
                     <label for="nivelPergunta" class="col-sm-2 col-form-label">Nível </label>
                 </div>
                 <select class="custom-select col-sm-2" id="nivelPergunta" name="nivelPergunta" required>
-                    <option selected>Selecione...</option>    
                     <option value="1">Fácil</option>
                     <option value="2">Médio</option>
                     <option value="3">Difícil</option>
@@ -175,7 +174,6 @@
                     <label for="tipoPergunta" class="col-sm-2 ">Tipo Pergunta</label>
                 </div>
                     <select class="custom-select col-sm-2" id="tipoPergunta" name="tipoPergunta" required>
-                        <option selected>Selecione...</option>
                         @foreach ($tiposPerguntas as $tipo)
                         	<option value="{{$tipo->id}}">{{$tipo->descricao}}</option>
                         @endforeach

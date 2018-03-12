@@ -5,12 +5,13 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Input;
+use Auth;
 use Validator;
 
 class PerguntaController extends Controller{
 
 	public function lista(){
-		
+		if(Auth::check()){
 		$perguntas = DB::select('select pergunta.id as idPergunta, 
 					pergunta.descricao as descricaoPergunta,
 			        pergunta.tempo as tempoPergunta,
@@ -22,15 +23,14 @@ class PerguntaController extends Controller{
 						from pergunta 
 			            INNER JOIN nivel on nivel.id = pergunta.id_nivel
 			            INNER JOIN tipopergunta on tipopergunta.id = pergunta.id_tipo ORDER BY pergunta.id DESC');
-		//dd($perguntas);
-
-		//$respostas = DB::select('select id, descricao, ehCorreta, _index from resposta');
-		
+	
 		$tiposPerguntas = DB::select('select id, descricao from tipopergunta');
 
 		return view('pergunta/cadastro-pergunta',['perguntas' => $perguntas,
-		 /*'respostas' => $respostas,*/
 		 'tiposPerguntas' => $tiposPerguntas]);
+		}else{
+			return redirect('/home');
+		}
 	}
 
 	public function insert(){
@@ -81,19 +81,22 @@ class PerguntaController extends Controller{
 			['descricao' => $descricaoPergunta, 'id_tipo' => $tipoPergunta, 'id_nivel' => $nivelPergunta,'tempo' => $tempoPergunta, 'imagem' => $arquivoOriginal, 'caminho_imagem' => $caminhoDestino]
 		);
 
+		DB::table('resposta')->insert([
+			['descricao' => $respostaA, 'id_pergunta' => $idPergunta, 'ehCorreta' => ($respostaCorreta === "A"), '_index' => 'A']
+		]);
 
+		DB::table('resposta')->insert([
+			['descricao' => $respostaB, 'id_pergunta' => $idPergunta, 'ehCorreta' => ($respostaCorreta === "B"), '_index' => 'B']
+		]);
 
-		DB::insert("insert into resposta (descricao, id_pergunta, ehCorreta, _index) 
-    
-        (SELECT '$respostaA',$idPergunta,'$respostaCorreta' = 'A', 'A' )
-        UNION
-        (SELECT '$respostaB',$idPergunta,'$respostaCorreta' = 'B', 'B' )
-        UNION
-        (SELECT '$respostaC',$idPergunta,'$respostaCorreta' = 'C', 'C' )
-        UNION
-        (SELECT '$respostaD',$idPergunta,'$respostaCorreta' = 'D', 'D' )
-    	;");
-		//return redirect->action('PerguntaController@lista');
+		DB::table('resposta')->insert([
+			['descricao' => $respostaC, 'id_pergunta' => $idPergunta, 'ehCorreta' => ($respostaCorreta === "C"), '_index' => 'C']
+		]);
+
+		DB::table('resposta')->insert([
+			['descricao' => $respostaD, 'id_pergunta' => $idPergunta, 'ehCorreta' => ($respostaCorreta === "D"), '_index' => 'D']
+		]);
+
 		return redirect()->route('perguntaCadastro');
 
 	}
@@ -123,15 +126,26 @@ class PerguntaController extends Controller{
 		$respostaD = $request->input('respostaD');
 		$respostaCorreta = $request->input('edit_respostaCorreta');
 
-		$updatePergunta = DB::update("update pergunta set descricao = '$descricaoPergunta',	id_nivel = $nivelPergunta, id_tipo = $tipoPergunta,	tempo = $tempoPergunta WHERE id = ".$idPergunta);
 
-		$updateRespostaA = DB::update("update resposta set descricao = '$respostaA', ehCorreta = '$respostaCorreta' = 'A' where id = ".$idRespostaA);
+		DB::table('pergunta')
+			->where('id',$idPergunta)
+			->update(['descricao' => $descricaoPergunta, 'id_nivel' => $nivelPergunta, 'id_tipo' => $tipoPergunta, 'tempo' => $tempoPergunta]);
 
-		$updateRespostaB = DB::update("update resposta set descricao = '$respostaB', ehCorreta = '$respostaCorreta' = 'B' where id = ".$idRespostaB);
+		DB::table('resposta')
+			->where('id', $idRespostaA)
+			->update(['descricao' => $respostaA, 'ehCorreta' => $respostaCorreta === 'A']);
 
-		$updateRespostaC = DB::update("update resposta set descricao = '$respostaC', ehCorreta = '$respostaCorreta' = 'C' where id = ".$idRespostaC);
+		DB::table('resposta')
+			->where('id', $idRespostaB)
+			->update(['descricao' => $respostaB, 'ehCorreta' => $respostaCorreta === 'B']);
 
-		$updateRespostaD = DB::update("update resposta set descricao = '$respostaD', ehCorreta = '$respostaCorreta' = 'D' where id = ".$idRespostaD);
+		DB::table('resposta')
+			->where('id', $idRespostaC)
+			->update(['descricao' => $respostaC, 'ehCorreta' => $respostaCorreta === 'C']);
+
+		DB::table('resposta')
+			->where('id', $idRespostaD)
+			->update(['descricao' => $respostaD, 'ehCorreta' => $respostaCorreta === 'D']);
 
 		return redirect()->route('perguntaCadastro');
 

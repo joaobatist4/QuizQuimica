@@ -2,10 +2,6 @@
 
 @section('content')
 
-@if(!({{Auth::check()}}))
-  {{ route('login') }}
-@endif
-
 <h2>Cadastro Tipo Pergunta</h2>
 <div class="col-sm-2">
     <br/>
