@@ -3,12 +3,12 @@
 @section('content')
 
 <h2>Cadastro Tipo Pergunta</h2>
-<div class="col-sm-2">
-    <br/>
-    
+<div class="col-sm-2">    
 <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#inserirTipoPergunta">
   Inserir Tipo de Pergunta
 </button>
+<br/>
+<br/>
 
 </div>
 
