@@ -179,10 +179,11 @@ class PerguntaController extends Controller{
 
 		$arrayPerguntasRespostas = array();
 
-		$arrayParcial = array();
+		$arrayDetalhePergunta = array();
 
 		foreach ($perguntas as $pergunta) {
-			
+
+
 			$respostas = DB::select('select resposta.id,
 			resposta.descricao,
 			resposta.ehCorreta,
@@ -191,14 +192,25 @@ class PerguntaController extends Controller{
             pergunta.descricao FROM Resposta
             INNER JOIN Pergunta WHERE pergunta.id = resposta.id_pergunta AND pergunta.id = '.$pergunta->idPergunta );
 
-			$arrayPerguntasRespostas[] = ['pergunta' => $pergunta, 'respostas' => $respostas];
+			$arrayDetalhePergunta[] = ['pergunta' => [
+				'id' => $pergunta->idPergunta,
+				'descricao' => $pergunta->descricaoPergunta,
+				'tempo' => $pergunta->tempoPergunta,
+				'img' => $pergunta->imgPergunta,
+				'diretorioImg' => $pergunta->caminhoImagem,
+				'tipo' => $pergunta->tipo,
+				'nivel' => $pergunta->nivel,
+			    'resposta' => $respostas]];
+
+			$arrayPerguntasRespostas[] = [ 'pergunta' => $arrayDetalhePergunta];
+			    //$arrayPerguntasRespostas[]
 			
 
 		}
 
-
 		//return response()->json($perguntas);
-		return response()->json($arrayPerguntasRespostas);
+		//return response()->json($arrayPerguntasRespostas);
+		return response()->json($arrayDetalhePergunta);
 	}
 
 	public function listaRespostasJSON($id){
