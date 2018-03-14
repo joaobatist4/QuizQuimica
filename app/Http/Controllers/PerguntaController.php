@@ -161,4 +161,61 @@ class PerguntaController extends Controller{
 		return redirect()->route('perguntaCadastro');
 	}
 
+
+	public function listaPerguntaJSON(){
+		$perguntas = DB::select('select pergunta.id as idPergunta, 
+					pergunta.descricao as descricaoPergunta,
+			        pergunta.tempo as tempoPergunta,
+			        pergunta.imagem as imgPergunta,
+			        pergunta.caminho_imagem as caminhoImagem,
+			        tipopergunta.id as tipoperguntaId,
+			        tipopergunta.descricao as tipo,
+			        nivel.descricao as nivel,
+			        nivel.id as nivelId,
+			        tipopergunta.descricao as tipo
+						from pergunta 
+			            INNER JOIN nivel on nivel.id = pergunta.id_nivel
+			            INNER JOIN tipopergunta on tipopergunta.id = pergunta.id_tipo ORDER BY pergunta.id DESC');
+
+		$arrayPerguntasRespostas = array();
+
+		$arrayParcial = array();
+
+		foreach ($perguntas as $pergunta) {
+			
+			$respostas = DB::select('select resposta.id,
+			resposta.descricao,
+			resposta.ehCorreta,
+            resposta._index,
+            resposta.id_pergunta,
+            pergunta.descricao FROM Resposta
+            INNER JOIN Pergunta WHERE pergunta.id = resposta.id_pergunta AND pergunta.id = '.$pergunta->idPergunta );
+
+			$arrayPerguntasRespostas[] = ['pergunta' => $pergunta, 'respostas' => $respostas];
+			
+
+		}
+
+
+		//return response()->json($perguntas);
+		return response()->json($arrayPerguntasRespostas);
+	}
+
+	public function listaRespostasJSON($id){
+			$pergunta = DB::select('select * from pergunta where id = '.$id);
+
+			$respostas = DB::select('select resposta.id,
+			resposta.descricao,
+			resposta.ehCorreta,
+            resposta._index,
+            resposta.id_pergunta,
+            pergunta.descricao FROM Resposta
+            INNER JOIN Pergunta WHERE pergunta.id = resposta.id_pergunta AND pergunta.id = '.$id);
+
+			$arrayPerguntas = array('perguntas' => $pergunta, 'respostas' => $respostas );
+
+		//return response()->json($respostas);
+			return response()->json($arrayPerguntas);
+	}
+
 }

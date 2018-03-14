@@ -32,3 +32,8 @@ Route::get('/jsonRespotas/{id}', 'PerguntaController@jsonRespotas')->where('id',
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/listaPergunta', 'PerguntaController@listaPerguntaJSON');
+
+Route::get('/listaResposta/{id}','PerguntaController@listaRespostasJSON');
+
